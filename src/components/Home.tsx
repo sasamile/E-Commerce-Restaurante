@@ -5,21 +5,19 @@ import Carrito from "./Carrito";
 import Products from "./Products";
 
 interface HomeProps{
-  setShowMenu:(value:boolean)=>void
+  modal:boolean
+  toggleCarrito:()=>void
 }
 
 
-function Home({setShowMenu}:HomeProps) {
-  const [modal, setModal] = useState(false);
+function Home({modal,toggleCarrito}:HomeProps) {
+  
 
   const [allProduct, setAllProduct] = useState<any[]>([]); // Inicializado como un array vacío
   const [total, setTotal] = useState(0); // Inicializado con el valor 0
   
 
-  const toggleCarrito = () => {
-    setModal(!modal);
-    setShowMenu(false)
-  };
+  
   return (
     <>
       <header className="p-8">

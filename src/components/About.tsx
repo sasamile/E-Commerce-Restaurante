@@ -9,12 +9,30 @@ interface FormObject {
 }
 
 function About() {
+  const [persona, setPersona] = useState<FormObject>({
+    id: "",
+    nombre: "",
+    apellido: "",
+    edad: "",
+    cc: "",
+  });
+
   const [objetos, setObjetos] = useState<FormObject[]>([]);
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [edad, setEdad] = useState("");
   const [cc, setCc] = useState("");
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(persona).length > 0) {
+      setNombre(persona.nombre);
+      setApellido(persona.apellido)
+      setEdad(persona.edad)
+      setCc(persona.cc)
+    }
+    console.log(persona);
+  }, [persona]);
 
   const generalId = () => {
     const id = Date.now().toString(36);
@@ -37,14 +55,31 @@ function About() {
       edad,
       cc,
     };
+    if (persona.id) {
+      objetoAgregado.id = persona.id;
 
-    setObjetos((prevObjetos) => [...prevObjetos, objetoAgregado]);
+      const pacientesActualizados = objetos.map((pacienteState) =>
+        pacienteState.id === persona.id ? objetoAgregado : pacienteState
+      );
+
+      setObjetos(pacientesActualizados);
+      // En lugar de setPersona({})
+      setPersona({ id: "", nombre: "", apellido: "", edad: "", cc: "" });
+    } else {
+      setObjetos((prevObjetos) => [...prevObjetos, objetoAgregado]);
+    }
 
     setNombre("");
     setApellido("");
     setEdad("");
     setCc("");
   };
+
+  const elimiarPacientes = (obj:any)=>{
+    const pacientesAct = objetos.filter((persona)=>persona.id !== obj.id)
+
+    setObjetos(pacientesAct)
+  }
 
   return (
     <>
@@ -94,13 +129,19 @@ function About() {
               />
             </div>
           </div>
-          <div className="mb-12">
-            <input
-              type="submit"
-              value="Enviar Formulario"
-              className="bg-sky-700 text-center w-full p-4 rounded-2xl font-bold text-3xl"
-            />
-          </div>
+          {persona.id ? (
+          <input
+            type="submit"
+            className="bg-yellow-500 w-full p-3 text-2xl text-white uppercase font-bold hover:bg-yellow-600 cursor-pointer transition-all"
+            value="Editar Paciente"
+          />
+        ) : (
+          <input
+            type="submit"
+            className="bg-indigo-600 w-full p-3 text-2xl text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
+            value="Agregar Paciente"
+          />
+        )}
           {error && (
             <>
               <div className="bg-red-500 p-4 text-white text-2xl">
@@ -115,14 +156,20 @@ function About() {
 
       <div className="mb-32 mt-12">
         {objetos.map((obj) => (
-          
-          <div key={obj.id}>
-            <h1>{obj.nombre}</h1>
-            <h1>{obj.edad}</h1>
-            <h1>{obj.apellido}</h1>
-          </div>
+          <div
+            key={obj.id}
+            className="bg-white rounded-2xl w-[80%] grid gap-12 mx-auto p-4 justify-center py-12"
+          >
+            <h1 className="text-3xl "><span className="font-bold uppercase">Nombre: </span>{obj.nombre}</h1>
+            <h1 className="text-3xl "><span className="font-bold uppercase">Apelllido:</span> {obj.apellido}</h1>
+            <h1 className="text-3xl "><span className="font-bold uppercase">Edad: </span>{obj.edad}</h1>
+            <h1 className="text-3xl "><span className="font-bold uppercase">Cc: </span>{obj.cc}</h1>
+            <div className="flex justify-between text-xl font-semibold">
+              <button className="bg-yellow-500 p-4 rounded-xl" onClick={() => setPersona(obj)}>Editar</button>
+              <button className="bg-red-500 p-4 rounded-xl" onClick={() => elimiarPacientes(obj)}>Eliminar</button>
+            </div>
             
-         
+          </div>
         ))}
       </div>
     </>

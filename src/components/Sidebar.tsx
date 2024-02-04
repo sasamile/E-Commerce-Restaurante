@@ -15,14 +15,13 @@ import { SidebarRout } from "../constant";
 import { useState } from "react";
 
 interface SidebarProps {
-  showMenu:boolean
-  setShowMenu:(value:boolean)=>void
+  showMenu: boolean;
+  setShowMenu: (value: boolean) => void;
+  toggleCarrito: () => void;
 }
 
-
-function Sidebar({showMenu,setShowMenu}:SidebarProps) {
+function Sidebar({ showMenu, setShowMenu, toggleCarrito }: SidebarProps) {
   const [activeLink, setActiveLink] = useState("Home");
-  
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -111,9 +110,12 @@ function Sidebar({showMenu,setShowMenu}:SidebarProps) {
             <FaUserCog />
           </button>
           <button>
-            <FaPlus />
+            <a href="/E-Commerce-Restaurante/about">
+              <FaPlus />
+            </a>
           </button>
-          <button>
+
+          <button onClick={toggleCarrito}>
             <BiSolidLayerPlus />
           </button>
           <button
