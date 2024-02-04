@@ -45,7 +45,7 @@ function Carrito({
 
   return (
     <aside
-      className={`fixed bg-[#1F1D2B] top-0 w-[350px] h-full overflow-y-auto ${
+      className={`fixed bg-[#1F1D2B]  top-0 w-full  h-full overflow-y-auto ${
         modal ? "right-0" : "right-full"
       }`}
     >

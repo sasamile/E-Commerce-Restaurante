@@ -4,9 +4,12 @@ import { useState } from "react";
 import Carrito from "./Carrito";
 import Products from "./Products";
 
+interface HomeProps{
+  setShowMenu:(value:boolean)=>void
+}
 
 
-function Home() {
+function Home({setShowMenu}:HomeProps) {
   const [modal, setModal] = useState(false);
 
   const [allProduct, setAllProduct] = useState<any[]>([]); // Inicializado como un array vacío
@@ -15,6 +18,7 @@ function Home() {
 
   const toggleCarrito = () => {
     setModal(!modal);
+    setShowMenu(false)
   };
   return (
     <>

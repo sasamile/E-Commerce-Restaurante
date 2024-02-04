@@ -14,9 +14,15 @@ import { Link } from "react-router-dom";
 import { SidebarRout } from "../constant";
 import { useState } from "react";
 
-function Sidebar() {
+interface SidebarProps {
+  showMenu:boolean
+  setShowMenu:(value:boolean)=>void
+}
+
+
+function Sidebar({showMenu,setShowMenu}:SidebarProps) {
   const [activeLink, setActiveLink] = useState("Home");
-  const [showMenu, setShowMenu] = useState(false);
+  
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
