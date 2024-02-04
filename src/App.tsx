@@ -18,7 +18,7 @@ function App() {
           </main>
         </Router>
 
-        Hola mundo
+       
       </div>
 
       <main></main>

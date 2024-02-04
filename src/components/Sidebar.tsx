@@ -1,4 +1,10 @@
-
+import {
+  SignOutButton,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/clerk-react";
+import { HiOutlineLogin } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { TbLogin2 } from "react-icons/tb";
 import { FaPlus, FaUserCog } from "react-icons/fa";
@@ -11,7 +17,6 @@ import { useState } from "react";
 function Sidebar() {
   const [activeLink, setActiveLink] = useState("Home");
   const [showMenu, setShowMenu] = useState(false);
-
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -50,10 +55,10 @@ function Sidebar() {
               </svg>
             </li>
             {/* Icon1 */}
-            {SidebarRout.map(({ href, Icon ,label}, index) => {
-             const isActive = label === activeLink;
-             
-             return (
+            {SidebarRout.map(({ href, Icon, label }, index) => {
+              const isActive = label === activeLink;
+
+              return (
                 <li
                   key={index}
                   className={`mx-auto ${
@@ -63,7 +68,9 @@ function Sidebar() {
                 >
                   <Link
                     to={href}
-                    onClick={()=>{setActiveLink(label)}}
+                    onClick={() => {
+                      setActiveLink(label);
+                    }}
                     className={`${
                       isActive
                         ? "flex justify-center bg-[#ec7c6a] p-2 rounded-lg"
@@ -78,13 +85,16 @@ function Sidebar() {
           </ul>
         </div>
         <div>
-          <ul>
-            <li className="mx-auto">
-              <a href="">
-                <TbLogin2 />
-              </a>
-            </li>
-          </ul>
+          <SignedOut>
+            <SignInButton>
+              <TbLogin2 />
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <SignOutButton>
+              <HiOutlineLogin />
+            </SignOutButton>
+          </SignedIn>
         </div>
       </div>
       <div>
