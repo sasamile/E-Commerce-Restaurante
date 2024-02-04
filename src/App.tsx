@@ -11,9 +11,9 @@ function App() {
           <Sidebar />
           <main className=" lg:pl-32 ">
             <Routes>
-              <Route path="/E-Commerce-Restaurante/*" element={<Home/>}>
-                <Route path="about" element={<About />} />
-              </Route>
+              <Route path="/E-Commerce-Restaurante/" element={<Home/>}/>
+                <Route path="/E-Commerce-Restaurante/about" element={<About />} />
+              
             </Routes>
           </main>
         </Router>
