@@ -1,7 +1,7 @@
 import React from "react";
 import { FaWindowClose } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { Value } from "sass";
+
 
 // Definir una interfaz para los objetos en allProduct
 interface Producto {

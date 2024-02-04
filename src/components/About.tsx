@@ -1,4 +1,4 @@
-import { Plato2 } from "../assets"
+
 
  
 

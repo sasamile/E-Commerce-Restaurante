@@ -6,12 +6,12 @@ import { Costilla, Sopa } from "../assets";
 
 export const SidebarRout = [
   {
-    href: "/",
+    href: "/E-Commerce-Restaurante/",
     Icon: RiHome3Line,
     label: "Home",
   },
   {
-    href: "/about",
+    href: "/E-Commerce-Restaurante/about",
     Icon: RiCompassLine,
     label: "about",
   },
